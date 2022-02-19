@@ -26,7 +26,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                     createAuthToken(request, response, filterChain, authorizationToken);
                 }
                 catch (Exception e){
-                    response.setHeader("error-message",e.getMessage());
+                    response.setHeader("X-Error-message",e.getMessage());
                     response.sendError(HttpServletResponse.SC_FORBIDDEN);
                 }
             }

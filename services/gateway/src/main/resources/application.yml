@@ -1,0 +1,43 @@
+spring:
+  application:
+    name:
+      gateway-service
+  cloud:
+    discovery:
+      enabled: true
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/customers/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedHeaders:
+              - content-type
+            allowedMethods:
+              - GET
+              - POST
+          '[/users/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedHeaders:
+              - content-type
+            allowedMethods:
+              - GET
+              - POST
+          '[/login]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods:
+              - POST
+          '[/inventory/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedHeaders:
+              - Content-Type
+            allowedMethods:
+              - GET
+              - POST
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 8888

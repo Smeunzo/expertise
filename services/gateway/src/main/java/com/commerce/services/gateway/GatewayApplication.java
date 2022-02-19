@@ -12,7 +12,8 @@ public class GatewayApplication {
 	@Bean
 	RouteLocator routes(RouteLocatorBuilder builder){
 		return builder.routes()
-				.route(r -> r.path("/users/**").uri("lb://USER-SERVICE")).build();
+				.route(r -> r.path("/users/**").uri("lb://AUTH-SERVICE"))
+				.route(r -> r.path("/login/**").uri("lb://AUTH-SERVICE")).build();
 	}
 
 	public static void main(String[] args) {

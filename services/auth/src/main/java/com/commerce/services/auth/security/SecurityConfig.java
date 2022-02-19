@@ -12,10 +12,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @Configurable
 @EnableWebSecurity
@@ -30,9 +36,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(username -> {
-            AuthCredentials authCredentials = authService.loadUserByUsername(username);
-            return new User(authCredentials.getUsername(), authCredentials.getPassword(), new ArrayList<>());
+        auth.userDetailsService(new UserDetailsService() {
+            @Override
+            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+                AuthCredentials authCredentials = authService.loadUserByUsername(username);
+                System.out.println(
+                        username
+                );
+                return new User(authCredentials.getUsername(),authCredentials.getPassword(),new ArrayList<>());
+            }
         });
     }
 
@@ -42,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().headers().frameOptions().disable()
-                .and().authorizeHttpRequests().antMatchers("/users/**", "/refreshToken").permitAll()
+                .and().authorizeHttpRequests().antMatchers("/users/", "/refreshToken").permitAll()
                 .and().authorizeRequests().anyRequest().authenticated()
                 .and().addFilter(new JwtAuthenticationFilter(authenticationManager()))
                 .addFilterBefore(new JwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
