@@ -13,7 +13,11 @@ public class GatewayApplication {
 	RouteLocator routes(RouteLocatorBuilder builder){
 		return builder.routes()
 				.route(r -> r.path("/users/**").uri("lb://AUTH-SERVICE"))
-				.route(r -> r.path("/login/**").uri("lb://AUTH-SERVICE")).build();
+				.route(r -> r.path("/refreshToken").uri("lb://AUTH-SERVICE"))
+				.route(r -> r.path("/login").uri("lb://AUTH-SERVICE"))
+				.route(r -> r.path("/inventory/**").uri("lb://INVENTORY-SERVICE"))
+				.route(r -> r.path("/user/**").uri("lb://USER-SERVICE"))
+				.build();
 	}
 
 	public static void main(String[] args) {

@@ -19,17 +19,17 @@ public class AuthController {
     private final AuthService authService;
     private final JWTService jwtService;
 
-    @GetMapping(path = "/users")
+    @GetMapping(path = "/auth")
     public List<AuthCredentials> getUsers(){
         return authService.loadUsers();
     }
 
-    @PostMapping(path= "/users/addUser")
+    @PostMapping(path= "/auth/addUser")
     public AuthCredentials addUser(@RequestBody AuthCredentials authCredentials){
         return authService.addUser(authCredentials);
     }
 
-    @GetMapping(path = "/users/refreshToken")
+    @GetMapping(path = "/refreshToken")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws Exception{
         jwtService.refreshToken(request,response);
     }

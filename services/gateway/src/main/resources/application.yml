@@ -8,14 +8,18 @@ spring:
     gateway:
       globalcors:
         corsConfigurations:
-          '[/customers/**]':
+          '[/user/**]':
             allowedOrigins: "http://localhost:3000"
             allowedHeaders:
               - content-type
             allowedMethods:
               - GET
               - POST
-          '[/users/**]':
+          '[/refreshToken]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods:
+              - GET
+          '[/auth/**]':
             allowedOrigins: "http://localhost:3000"
             allowedHeaders:
               - content-type
