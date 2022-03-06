@@ -12,11 +12,11 @@ public class GatewayApplication {
 	@Bean
 	RouteLocator routes(RouteLocatorBuilder builder){
 		return builder.routes()
-				.route(r -> r.path("/users/**").uri("lb://AUTH-SERVICE"))
-				.route(r -> r.path("/refreshToken").uri("lb://AUTH-SERVICE"))
-				.route(r -> r.path("/login").uri("lb://AUTH-SERVICE"))
-				.route(r -> r.path("/inventory/**").uri("lb://INVENTORY-SERVICE"))
-				.route(r -> r.path("/user/**").uri("lb://USER-SERVICE"))
+				.route(r -> r.path("/users/**").uri("http://localhost:8083"))
+				.route(r -> r.path("/refreshToken").uri("http://localhost:8083"))
+				.route(r -> r.path("/login").uri("http://localhost:8083"))
+				.route(r -> r.path("/inventory/**").uri("http://localhost:8082"))
+				.route(r -> r.path("/user/**").uri("http://localhost:8081"))
 				.build();
 	}
 

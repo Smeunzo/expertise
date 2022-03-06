@@ -9,39 +9,30 @@ spring:
       globalcors:
         corsConfigurations:
           '[/user/**]':
-            allowedOrigins: "http://localhost:3000"
+            allowedOrigins: "*"
             allowedHeaders:
               - content-type
             allowedMethods:
               - GET
               - POST
           '[/refreshToken]':
-            allowedOrigins: "http://localhost:3000"
+            allowedOrigins: "*"
             allowedMethods:
               - GET
           '[/auth/**]':
-            allowedOrigins: "http://localhost:3000"
-            allowedHeaders:
-              - content-type
+            allowedOrigins: "*"
             allowedMethods:
               - GET
               - POST
           '[/login]':
-            allowedOrigins: "http://localhost:3000"
+            allowedOrigins: "*"
             allowedMethods:
               - POST
           '[/inventory/**]':
-            allowedOrigins: "http://localhost:3000"
-            allowedHeaders:
-              - Content-Type
+            allowedOrigins: "*"
             allowedMethods:
               - GET
               - POST
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka
 
 server:
   port: 8888

@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "cc97ef7a-e5fe-4cc1-aece-67169226aafa",
+		"name": "expertise",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8888/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var json = JSON.parse(responseBody)\r",
+							"\r",
+							"pm.globals.set('token', json['access-token'])\r",
+							"pm.globals.set('refresh', json['refresh-token'])"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "user1",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "user1Pass",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8888/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8888/user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8888/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8888/user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"F78UJ9\",\r\n    \"firstname\": \"Doe\",\r\n    \"lastname\": \"john\",\r\n    \"middlename\": \"\",\r\n    \"email\": \"doe@john.com\",\r\n    \"birthdate\": \"1970-01-01\",\r\n    \"address\": {\r\n        \"streetNumber\": 41,\r\n        \"streetName\": \"Rue de la marmotte \",\r\n        \"locality\": null,\r\n        \"zipCode\": \"13001\",\r\n        \"city\": \"Marseille\",\r\n        \"country\": \"France\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8888/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8888/inventory/products",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8888/inventory/products",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"inventory",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8888/inventory/categories",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8888/inventory/categories",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"inventory",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
