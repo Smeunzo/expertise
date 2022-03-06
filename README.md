@@ -12,7 +12,7 @@ mvn package
 
 ### Run
 
-Dans 4 shells différents lancer dans cet ordre (toujours à la racine)
+Dans 4 shells différents lancer dans cet ordre (à la racine)
 
 ```shell
 # SHELL 1
